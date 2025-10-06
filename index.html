@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MěSST Ostrava</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="else.css">
+    <script src="index-turnaje.js"></script>
+</head>
+
+<body>
+    <!-- Header s kreativním menu -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="#"><img src="images/logo.png" alt="Ostravský pinec logo"></a>
+                    <div>
+                        <h1><a href="#">MěSST Ostrava</a></h1>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav-item">Domů</a>
+                    <a href="turnaje.html" class="nav-item">Turnaje</a>
+                    <a href="https://stis.ping-pong.cz/oblast/svaz-420807" class="nav-item" target="_blank" rel="noopener">Soutěže</a>
+                    <a href="foto.html" class="nav-item">Foto</a>
+                    <a href="zpravodaje.html" class="nav-item">Zpravodaje</a>
+                    <a href="svaz.html" class="nav-item">Svaz</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Prostor pro fotky hráčů -->
+        <div class="player-photos">
+            <div class="photo-slide"
+                style="background-image: url('images/cpo.jpg');">
+                <div class="photo-info">Czech Para Open 2025, Várenská</div>
+            </div>
+            <div class="photo-slide"
+                style="background-image: url('images/pmo.jpg');">
+                <div class="photo-info">Přebory Města Ostravy U11 2025, Várenská</div>
+            </div>
+            <div class="photo-slide"
+                style="background-image: url('images/mej1.jpg');">
+                <div class="photo-info">Mistrovství Evropy Juniorů 2025, RT Torax Arena</div>
+            </div>            
+        </div>
+    </header>
+
+    <!-- Hlavní obsah -->
+    <div class="container">
+        <div class="main-content">
+            <div class="content-primary">
+                <section id="turnaje">
+                    <h2 class="section-title">Turnaje</h2>
+                    <p><strong>Informace o turnajích na půdě MěSST Ostrava</strong> 
+                    <p><a href="turnaje.html" class="basic-link">Kompletní výpis turnajů</a></p>
+                    <br>
+                    <!-- Sekce Mládež -->
+                    <div class="tournament-category">
+                        <h3>Mládež</h3>
+                        <div class="tournament-list">
+                            <!-- PMO jednotlivců -->
+                            <div class="tournament-item">
+                                <div class="tournament-header" onclick="toggleTournament(this)">
+                                    <div class="tournament-name">PMO jednotlivců (U11, U13, U15, U17, U19)</div>
+                                    <div class="tournament-date">2025/2026</div>
+                                    <div class="tournament-toggle">▼</div>
+                                </div>
+                                <div class="tournament-content">
+                                    <div class="tournament-details">
+                                        <div class="tournament-info">
+                                            <div class="info-group">
+                                                <h4>Termíny turnajů:</h4>
+                                                <p><strong>U11:</strong> zatím neurčeno <a href="#"></a></p>
+                                                <p><strong>U13:</strong> zatím neurčeno <a href="#"></a></p>
+                                                <p><strong>U15:</strong> zatím neurčeno <a href="#"></a></p>
+                                                <p><strong>U17:</strong> zatím neurčeno <a href="#"></a></p>
+                                                <p><strong>U19:</strong> zatím neurčeno <a href="#"></a></p>
+                                            </div>
+                                            <div class="info-group">
+                                                <h4>Místo a čas konání:</h4>
+                                                <p>TJ Ostrava KST, Várenská</p>
+                                                <p>8:00 - 8:30 prezence</p>
+                                            </div>
+                                        </div>
+                                        <div class="tournament-actions">
+                                            <!-- <a href="#" class="btn btn-primary">Propozice U11</a> -->
+                                            <!-- <a href="#" class="btn btn-primary">Propozice U13 a U17</a> -->
+                                            <!-- <a href="#" class="btn btn-primary">Propozice U15 a U19</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PMO družstev -->
+                            <div class="tournament-item">
+                                <div class="tournament-header" onclick="toggleTournament(this)">
+                                    <div class="tournament-name">PMO družstev (U15, U19)</div>
+                                    <div class="tournament-date">2025/2026</div>
+                                    <div class="tournament-toggle">▼</div>
+                                </div>
+                                <div class="tournament-content">
+                                    <div class="tournament-details">
+                                        <div class="tournament-info">
+                                            <div class="info-group">
+                                                <h4>Termíny:</h4>
+                                                <p><strong>1:</strong> xx. 04. 2026</p>
+                                                <p><strong>2:</strong> xx. 05. 2026</p>
+                                                <p><strong>3:</strong> xx. 06. 2026</p>
+                                            </div>
+                                            <div class="info-group">
+                                                <h4>Místo a čas konání:</h4>
+                                                <p>TJ Sokol Radvanice-Bartovice, Havláskova</p>
+                                                <p>8:00 - 8:30 prezence</p>
+                                                <h4>Startovné:</h4>
+                                                <p>100 Kč za družstvo - hradí oddíl</p>
+                                            </div>
+                                        </div>
+                                        <div class="tournament-actions">
+                                            <!-- <a href="#" class="btn btn-primary">Propozice</a> -->
+                                            <!-- <a href="#" class="btn btn-success">Celkové výsledky</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BTM -->
+                            <div class="tournament-item">
+                                <div class="tournament-header" onclick="toggleTournament(this)">
+                                    <div class="tournament-name">BTM (U19 - divize A, B, C)</div>
+                                    <div class="tournament-date">2025/2026</div>
+                                    <div class="tournament-toggle">▼</div>
+                                </div>
+                                <div class="tournament-content">
+                                    <div class="tournament-details">
+                                        <div class="tournament-info">
+                                            <div class="info-group">
+                                                <h4>Termíny:</h4>
+                                                <p><strong>1:</strong> 28. 09. 2025 <a href="#">výsledky</a></p>
+                                                <p><strong>2:</strong> 22. 11. 2025 <a href="#"></a></p>
+                                                <p><strong>3:</strong> 14. 12. 2025 <a href="#"></a></p>
+                                                <p><strong>4:</strong> xx. 01. 2026 <a href="#"></a></p>
+                                                <p><strong>5:</strong> xx. 02. 2026 <a href="#"></a></p>
+                                                <p><strong>6:</strong> xx. 03. 2026 <a href="#"></a></p>
+                                            </div>
+                                            <div class="info-group">
+                                                <h4>Místo a čas konání:</h4>
+                                                <p>TJ Ostrava KST, Várenská</p>
+                                                <p>8:00 - 8:30 prezence</p>
+                                                <h4>Startovné:</h4>
+                                                <p>50 Kč za hráče - hradí oddíl</p>
+                                            </div>
+                                        </div>
+                                        <div class="tournament-actions">
+                                            <!-- První propozice -->
+                                            <a href="#" class="btn btn-primary">Propozice 1-3</a>
+                                            <!-- <a href="#" class="btn btn-primary">Propozice 4-6</a> -->
+                                            <!-- Konečné výsledky -->
+                                            <!-- <a href="#" class="btn btn-success">Celkové výsledky</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BTM mini -->
+                            <div class="tournament-item">
+                                <div class="tournament-header" onclick="toggleTournament(this)">
+                                    <div class="tournament-name">BTM mini (U11)</div>
+                                    <div class="tournament-date">2025/2026</div>
+                                    <div class="tournament-toggle">▼</div>
+                                </div>
+                                <div class="tournament-content">
+                                    <div class="tournament-details">
+                                        <div class="tournament-info">
+                                            <div class="info-group">
+                                                <h4>Termíny:</h4>
+                                                <p><strong>1:</strong> 19. 10. 2025 <a href="#"></a></p>
+                                                <p><strong>2:</strong> 09. 11. 2025 <a href="#"></a></p>
+                                                <p><strong>3:</strong> 06. 12. 2025 <a href="#"></a></p>
+                                                <p><strong>4:</strong> xx. 0x. 2026 <a href="#"></a></p>
+                                                <p><strong>5:</strong> xx. 0x. 2026 <a href="#"></a></p>
+                                                <p><strong>6:</strong> xx. 0x. 2026 <a href="#"></a></p>
+                                            </div>
+                                            <div class="info-group">
+                                                <h4>Místo a čas konání:</h4>
+                                                <p>Orel jednota Ostrava - Stará Bělá, Katolický dům</p>
+                                                <p>Prezence do 8:45</p>
+                                                <h4>Startovné:</h4>
+                                                <p>50 Kč za hráče - hradí oddíl</p>
+                                            </div>
+                                        </div>
+                                        <div class="tournament-actions">
+                                            <a href="#" class="btn btn-primary">Propozice 1-3</a>
+                                            <!-- <a href="#" class="btn btn-primary">Propozice 4-6</a> -->
+                                            <!-- <a href="#" class="btn btn-success">Celkové výsledky</a> -->
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sekce Dospělí -->
+                    <div class="tournament-category">
+                        <h3>Dospělí</h3>
+                        <div class="tournament-list">
+                            <!-- PMO dospělí -->
+                            <div class="tournament-item">
+                                <div class="tournament-header" onclick="toggleTournament(this)">
+                                    <div class="tournament-name">PMO jednotlivců</div>
+                                    <div class="tournament-date">2025/2026</div>
+                                    <div class="tournament-toggle">▼</div>
+                                </div>
+                                <div class="tournament-content">
+                                    <div class="tournament-details">
+                                        <div class="tournament-info">
+                                            <div class="info-group">
+                                                <h4>Termín:</h4>
+                                                <p>xx. 06. 2026</p>
+                                            
+                                                
+                                            </div>
+                                            <div class="info-group">
+                                                <h4>Místo a čas konání:</h4>
+                                                <p>TJ Ostrava KST, Várenská</p>
+                                                <p>8:00 - 8:30 prezence</p>
+                                            </div>
+                                        </div>
+                                        <div class="tournament-actions">
+                                            <a href="#" class="btn btn-primary">Propozice</a>
+                                            <a href="#" class="btn btn-secondary">Přihlášky online</a>
+                                            <a href="#" class="btn btn-success">Výsledky</a>
+                                        </div>
+                                
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TOP8 -->                           
+                            <div class="tournament-item">
+                                <div class="tournament-header" onclick="toggleTournament(this)">
+                                    <div class="tournament-name">TOP8</div>
+                                    <div class="tournament-date">2024/2025</div>
+                                    <div class="tournament-toggle">▼</div>
+                                </div>
+                                <div class="tournament-content">
+                                    <div class="tournament-details">
+                                        <div class="tournament-info">
+                                            <div class="info-group">
+                                                <h4>Termíny (seznam hráčů: <a href="">1</a>, <a href="">2</a>, <a href="">3</a>, <a href="">4</a>, <a href="">5</a>):</h4>
+                                                <p><strong>MěP 1. třídy:</strong> 22. 04. 2025, TJ Sokol Hrabůvka</p>
+                                                <p><strong>MěP 2. třídy:</strong> 14. 04. 2025, TJ Sokol Hrabůvka</p>
+                                                <p><strong>MěP 3. třídy:</strong> 24. 04. 2025, KST Zengrovka</p>
+                                                <p><strong>MěP 4. třídy:</strong> 16. 04. 2025, TTC MG Odra Vratimov</p>
+                                                <p><strong>MěP 5. třídy:</strong> 15. 04. 2025, SK Vřesina LT</p>
+                                            </div>
+                                            <div class="info-group">
+                                                <h4>Vítězové (kompletní výsledky: <a href="">1</a>, <a href="">2</a>, <a href="">3</a>, <a href="">4</a>, <a href="">5</a>):</h4>
+                                                <p><strong>Roman Vicher</strong> - TJ Sokol Radvanice-Bartovice</p>
+                                                <p><strong>David Osvald</strong> - TJ Sokol Hrabůvka</p>
+                                                <p><strong>František Chmura</strong> - SK Svinov</p>
+                                                <p><strong>Pavel Schneider</strong> - TJ Ostrava KST</p>
+                                                <p><strong>Jan Stočes</strong> - TTC Petřkovice</p>
+                                            </div>
+                                        </div>
+                                        <div class="tournament-actions">
+                                            <a href="#" class="btn btn-primary">Propozice</a>
+                                            <a href="#" class="btn btn-secondary">Přihlášky online</a>
+                                        </div>
+                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                
+
+                <!-- Sponzoři -->
+                <section id="sponzori">
+                    <h2 class="section-title">Naši sponzoři</h2>
+                    <div class="sponsors-grid">
+                        <a class="sponsor-logo" href="https://www.ostrava.cz/" target="_blank" rel="noopener">
+                            <img src="/images/Ostrava_lg.jpg" alt="Sponzor 1">
+                        </a>
+                        <a class="sponsor-logo" href="https://www.pincesobchod.cz/" target="_blank" rel="noopener">
+                            <img src="images/desaka.png" alt="Sponzor 2">
+                        </a>
+                        <a class="sponsor-logo" href="https://eshop.pingpongsport.cz" target="_blank" rel="noopener">
+                            <img src="images/pingpongsport.jpg" alt="Sponzor 3">
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sekundární obsah - Sidebar -->
+            <div class="content-secondary">
+                <div class="sidebar-block">
+                    <h3>Nejbližší akce</h3>
+                    <ul class="sidebar-list">
+                        <iframe src="https://calendar.google.com/calendar/embed?src=668ce02ac4042f9361bdba10e2ccfa8246289de831915fb3348282174a5513bd%40group.calendar.google.com&ctz=Europe%2FPrague&mode=AGENDA&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0" style="border: 0" width="310" height="400" frameborder="0" scrolling="no"></iframe>
+                    </ul>
+                </div>
+
+                <div class="sidebar-block">
+                    <h3>Představenstvo</h3>
+                    <ul class="sidebar-list">
+                        <li>
+                            <p><strong>Předseda</strong></p>
+                            <p>Marián Hájko</p>
+                            <p><a href="tel:+420 606 774 322">+420 606 774 322</a></p>
+                            <p><a href="mailto:mhajko@centrum.cz">mhajko@centrum.cz</a></p>
+                        </li>
+                        <li>
+                            <p><strong>Místopředseda</strong></p>
+                            <p>Miroslav Henžel</p>
+                            <p><a href="tel: +420 724 049 092">+420 724 049 092</a></p>
+                            <p><a href="mailto:henzel.miroslav@seznam.cz">henzel.miroslav@seznam.cz</a></p>
+                        </li>
+                        <li>
+                            <p><strong>Předseda revizní komise</strong></p>
+                            <p>Radomír Vavrečka</p>
+                            <p><a href="tel: +420 605 268 096">+420 605 268 096</a></p>
+                            <p><a href="mailto:vavrecka@landrax.cz">vavrecka@landrax.cz</a></p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-block">
+                    <div class="sidebar-list">
+                        <h3>Oddíly</h3>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807012" target="_blank" rel="noopener">01. TJ Ostrava</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807031" target="_blank" rel="noopener">01. SK SVINOV</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807036" target="_blank" rel="noopener">01. TTC Ostrava-Poruba</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807038" target="_blank" rel="noopener">02. TJ Sokol Horní Lhota</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807017" target="_blank" rel="noopener">03. TJ Sokol Hrabůvka</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420804018" target="_blank" rel="noopener">04. TJ Sokol Klimkovice</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807006" target="_blank" rel="noopener">05. TJ Sokol Krásné Pole</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807033" target="_blank" rel="noopener">06. TJ Sokol Ostrava - Výškovice</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807044" target="_blank" rel="noopener">06. MH stolní tenis Ostrava</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807019" target="_blank" rel="noopener">07. TJ Sokol Radvanice-Bartovice</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420802019" target="_blank" rel="noopener">08. TTC MG ODRA Vratimov</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807041" target="_blank" rel="noopener">09. TTC Ostrava</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807046" target="_blank" rel="noopener">10. TTC Petřkovice</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807037" target="_blank" rel="noopener">11. SK Vřesina LT</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807045" target="_blank" rel="noopener">12. KPŠ při SPŠ Zengrova</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807034" target="_blank" rel="noopener">13. SSVČ Don Bosco</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807040" target="_blank" rel="noopener">13. Orel jednota Ostrava - Třebovice</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807002" target="_blank" rel="noopener">14. Orel jednota Ostrava - Stará Bělá</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807032" target="_blank" rel="noopener">15. Ostrava Zábřeh</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807026" target="_blank" rel="noopener">16. VSK VŠB-TU Ostrava</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807047" target="_blank" rel="noopener">xx. SK vozíčkářů Ostrava</a></p>
+                        <p><a href="https://stis.ping-pong.cz/oddil-420807043" target="_blank" rel="noopener">xx. Akademie ST Petra Korbela</a></p>
+                        <br>
+                        <iframe style="border:none" src="https://mapy.com/s/bebavuderu" width="310" height="280" frameborder="0"></iframe>
+                        <p><a href="https://mapy.com/s/jenofuzobu" target="_blank" rel="noopener">Mapa zápasových heren</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <h3>Městský svaz stolního tenisu Ostrava z.s.</h3>
+                    <p>V. Jiříkovského 165/23</p>
+                    <p>700 30 Ostrava – Dubina</p>
+                    <p>IČ: 22880534</p>
+                    <p>Č. ú.: 2102719242/2010</p>
+                    <p>Admin webu: <a href="mailto:pinec@zaskodny.cz">pinec@zaskodny.cz</a></p>
+                </div>
+
+                
+
+                <div class="footer-links">
+                    <h3>Odkazy</h3>
+                    <ul>
+                        <li><a href="https://www.ping-pong.cz/" target="_blank" rel="noopener">Česká asociace stolního tenisu</a></li>
+                        <li><a href="https://stis.ping-pong.cz/oblast/svaz-420807" target="_blank" rel="noopener">STIS - výsledkový servis</a></li>
+                        <li><a href="https://www.mssst.cz/" target="_blank" rel="noopener">Moravskoslezský svaz stolního tenisu</a></li>
+                        <li><a href="https://www.pinkponk.cz/" target="_blank" rel="noopener">Česká asociace Pink Ponku</a></li>
+                    </ul>
+                </div>
+
+                
+            </div>
+
+            <div class="copyright">
+                <p>Vytvořil <a href="https://is.muni.cz/www/matyas.kolek/" target="_blank" rel="noopener">Matyáš Kolek</a></p>
+                <p>&copy; 2025 MěSST Ostrava</p>
+            </div>
+        </div>
+    </footer>
+
+    
+</body>
+
+</html>
