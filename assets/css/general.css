@@ -44,6 +44,10 @@ header {
     overflow: hidden;
 }
 
+#header-placeholder {
+    margin-bottom: 10px;
+}
+
 .header-top {
     display: flex;
     justify-content: space-between;
@@ -85,7 +89,7 @@ header {
     opacity: 0.9;
 }
 
-.creative-nav {
+.nav {
     display: flex;
     gap: 10px;
 }
