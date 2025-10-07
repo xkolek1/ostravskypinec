@@ -3,7 +3,7 @@ The website runs on simple HTML/CSS/JS
 
 **Structure:**  
 - `index.html` – home page  
-- `pages/` – other pages  
+- `` – other pages  
 - `components/` – reusable header, footer, sponsors, sidebar...  
 - `assets/` – images, css, js, fonts  
   - `js/`  
