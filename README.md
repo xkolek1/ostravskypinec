@@ -2,9 +2,9 @@
 The website runs on simple HTML/CSS/JS  
 
 **Structure:**  
-- `pages` - had to be removed due to linking difference between local and github -> pages in the root repository for now
 - `index.html` – home page 
-- `components/` – reusable header, footer, sponsors, sidebar...  
+- `components/` – reusable header, footer, sponsors, sidebar...
+- `pages/` - had to be removed due to linking difference between local and github -> pages in the root repository for now  
 - `assets/` – images, css, js, fonts  
   - `js/`  
       - `include.js` - needs to be linked for using `components/`, accepts id="$component"-placeholder
@@ -25,5 +25,6 @@ The website runs on simple HTML/CSS/JS
   "svaz" - no relevant data yet  
 
 **unfixed errors** - header (-bcs of the photos) and footer (-just weird) has to be unified between index and other pages
-  
+**documentation** - missing/not good  
+
 More soon ;)
