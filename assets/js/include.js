@@ -6,7 +6,7 @@ async function loadComponent(id, file) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("header-placeholder", "/components/header.html");
+  loadComponent("header-placeholder", "https://xkolek1.github.io/ostravskypinec/components/header.html");
   loadComponent("footer-placeholder", "/components/footer.html");
   loadComponent("sponsors-placeholder", "/components/sponsors.html");
   loadComponent("sidebar-placeholder", "/components/sidebar.html");
