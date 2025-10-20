@@ -1,4 +1,9 @@
 {
-    "tournaments": [],
+    "tournaments": [
+        {
+            "fileName": "BTM-mini.pdf",
+            "pushDate": "2025-10-20"
+        }
+    ],
     "photo_albums": []
 }
