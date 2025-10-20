@@ -1,5 +1,5 @@
 # Remake of ostravskypinec.cz website --IN PROGRESS--
-The website runs on simple HTML/CSS/JS  
+The website runs on simple HTML/CSS/JS, some Python for generating JSON
 
 **Structure:**  
 - `index.html` – home page 
@@ -24,9 +24,9 @@ The website runs on simple HTML/CSS/JS
   "zpravodaje" - main idea done with pagination, links missing  
   "svaz" - no relevant data yet  
 
-  !! automatization idea - push of document into the repository generates json, info from json is printed into "turnaje" also possibly --aktualizace-- section, doc of tournament is added automaticaly to index page of its own category - category also takes date of tournament straight from calendar !! -> before 1st tournament will be necesarry to clear the tournament info & before new season to create new season page in "turnaje"
+  !! automatization idea - push of document into the repository generates json, info from json is printed into "turnaje" also possibly --aktualizace-- section, doc of tournament is added automaticaly to index page of its own category as well as its info !! -> before 1st tournament will be probably necesarry to clear the tournament info & before new season to create new season page in "turnaje"
     ---**not implemented yet**  
-  !! maybe simple ai for autocreating calendar events from tournament docs? - then also everything else can be fully automated? !!
+  !! autocreating events in google calendar !!
 
 **unfixed errors** - header (-bcs of the photos - but the diff doesnt look bad) and footer (-just weird) has to be unified between index and other pages
 **documentation** - missing/not good  
