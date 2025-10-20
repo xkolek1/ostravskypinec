@@ -1,4 +1,21 @@
 {
-    "tournaments": [],
+    "tournaments": [
+        {
+            "fileName": "priloha0.pdf",
+            "pushDate": "2025-10-20",
+            "tournamentDates": [
+                "16. 03. 2025"
+            ]
+        },
+        {
+            "fileName": "BTM-mini.pdf",
+            "pushDate": "2025-10-20",
+            "tournamentDates": [
+                "19. 10. 2025",
+                "09. 11. 2025",
+                "06. 12. 2025"
+            ]
+        }
+    ],
     "photo_albums": []
 }
