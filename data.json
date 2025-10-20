@@ -3,6 +3,13 @@
         {
             "fileName": "BTM-mini.pdf",
             "pushDate": "2025-10-20"
+        },
+        {
+            "fileName": "priloha0.pdf",
+            "pushDate": "2025-10-20",
+            "tournamentDates": [
+                "27. 12. 2024"
+            ]
         }
     ],
     "photo_albums": []
