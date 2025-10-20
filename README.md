@@ -17,14 +17,18 @@ The website runs on simple HTML/CSS/JS
   "Oddíly" - uses "Mapy.cz" map of the playing club fields; has to be checked and updated at least yearly
 
 **Progress comentary**  
-  "index" - structure done, links have to be added
-  "turnaje" - pagination done, structure not rly, links missing
-  "soutěže" - some improvement may be needed, for now just a link to stis.cz
-  "foto" - missing
-  "zpravodaje" - main idea done with pagination, links missing
+  "index" - structure done, links have to be added  
+  "turnaje" - pagination done, structure not rly, links missing  
+  "soutěže" - some improvement may be needed, for now just a link to stis.cz  
+  "foto" - missing  
+  "zpravodaje" - main idea done with pagination, links missing  
   "svaz" - no relevant data yet  
 
-**unfixed errors** - header (-bcs of the photos) and footer (-just weird) has to be unified between index and other pages
+  !! automatization idea - push of document into the repository generates json, info from json is printed into "turnaje" also possibly --aktualizace-- section, doc of tournament is added automaticaly to index page of its own category - category also takes date of tournament straight from calendar !! -> before 1st tournament will be necesarry to clear the tournament info & before new season to create new season page in "turnaje"
+    ---**not implemented yet**  
+  !! maybe simple ai for autocreating calendar events from tournament docs? - then also everything else can be fully automated? !!
+
+**unfixed errors** - header (-bcs of the photos - but the diff doesnt look bad) and footer (-just weird) has to be unified between index and other pages
 **documentation** - missing/not good  
 
 More soon ;)
