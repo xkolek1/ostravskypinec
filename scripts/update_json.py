@@ -3,8 +3,16 @@ import os
 import re
 import fitz # PyMuPDF
 from datetime import datetime
+import locale # Pro správné řazení českých datumů
 
-# Cesty k souborům
+# Nastavení českého locale pro správné řazení měsíců
+try:
+    locale.setlocale(locale.LC_TIME, 'cs_CZ.UTF-8')
+except locale.Error:
+    print("České locale 'cs_CZ.UTF-8' není dostupné. Řazení nemusí být správné.")
+
+
+# Cesty ke složkám a souborům
 PROPOZICE_DIR = 'assets/propozice'
 ALBUMS_DIR = 'assets/images/albums'
 JSON_FILE = 'data.json'
@@ -16,11 +24,12 @@ def extract_dates_from_pdf(pdf_path):
     """
     dates = []
     
-    # Slovník pro převod českých názvů měsíců (v 2. pádě) na čísla
     month_map = {
-        'ledna': '01', 'února': '02', 'března': '03', 'dubna': '04',
-        'května': '05', 'června': '06', 'července': '07', 'srpna': '08',
-        'září': '09', 'října': '10', 'listopadu': '11', 'prosince': '12'
+        'ledna': '01', 'unora': '02', 'brezna': '03', 'dubna': '04',
+        'kvetna': '05', 'cervna': '06', 'cervence': '07', 'srpna': '08',
+        'zari': '09', 'rijna': '10', 'listopadu': '11', 'prosince': '12',
+        # Přidány varianty s diakritikou pro robustnost
+        'února': '02', 'března': '03', 'září': '09', 'října': '10'
     }
 
     try:
@@ -29,37 +38,41 @@ def extract_dates_from_pdf(pdf_path):
         for page in doc:
             full_text += page.get_text()
 
-        # Krok 1: Odstranění řádků, které nechceme prohledávat
         lines = full_text.splitlines()
         filtered_lines = [line for line in lines if not line.strip().lower().startswith("v ostravě dne")]
         filtered_text = "\n".join(filtered_lines)
 
-        # Krok 2: Vylepšený regulární výraz
-        # Hledá buď čísla (01-12) nebo názvy měsíců ze slovníku
-        month_pattern = r'(\d{1,2}|' + '|'.join(month_map.keys()) + r')'
-        date_pattern = r'\b(\d{1,2})\.\s*' + month_pattern + r'\s*\.\s*(\d{4})\b'
+        # Regulární výraz, který tečku za měsícem bere jako nepovinnou (díky `\.?`)
+        month_pattern_keys = '|'.join(month_map.keys())
+        date_pattern = re.compile(
+            r'\b(\d{1,2})\.\s*(\d{1,2}|' + month_pattern_keys + r')\.?\s*(\d{4})\b',
+            re.IGNORECASE
+        )
+        
+        found_matches = date_pattern.findall(filtered_text)
 
-        found_matches = re.findall(date_pattern, filtered_text, re.IGNORECASE)
-
-        # Krok 3: Zpracování a sjednocení formátu nalezených datumů
         for match in found_matches:
             day, month, year = match
             
-            # Převedeme slovní měsíc na číslo, pokud je to potřeba
-            if not month.isdigit():
-                month = month_map[month.lower()]
+            month_str = str(month).lower()
+            if not month_str.isdigit():
+                # Normalizace - odstranění diakritiky pro klíč ve slovníku
+                normalized_month = month_str.replace('ú', 'u').replace('ů', 'u').replace('ř', 'r').replace('í', 'i')
+                month_num = month_map.get(normalized_month) or month_map.get(month_str)
+            else:
+                month_num = month_str
             
-            # Sestavíme finální formát a zajistíme dvouciferný formát pro den a měsíc
-            formatted_date = f"{int(day):02d}. {int(month):02d}. {year}"
-            
-            if formatted_date not in dates:
-                dates.append(formatted_date)
+            if month_num:
+                formatted_date = f"{int(day):02d}. {int(month_num):02d}. {year}"
+                if formatted_date not in dates:
+                    dates.append(formatted_date)
 
     except Exception as e:
         print(f"Chyba při zpracování PDF souboru {pdf_path}: {e}")
     
-    # Seřadíme data pro lepší přehlednost
-    return sorted(dates)
+    # Seřadíme data chronologicky
+    dates.sort(key=lambda date: datetime.strptime(date, "%d. %m. %Y"))
+    return dates
 
 
 def update_json_data():
@@ -74,7 +87,6 @@ def update_json_data():
     
     today = datetime.now().strftime('%Y-%m-%d')
 
-    # Zpracování propozic
     os.makedirs(PROPOZICE_DIR, exist_ok=True)
     for file_name in os.listdir(PROPOZICE_DIR):
         if file_name.endswith('.pdf') and file_name not in existing_tournaments:
@@ -90,7 +102,6 @@ def update_json_data():
                 'tournamentDates': tournament_dates
             })
 
-    # Zpracování fotoalb (beze změny)
     os.makedirs(ALBUMS_DIR, exist_ok=True)
     for album_name in os.listdir(ALBUMS_DIR):
         album_path = os.path.join(ALBUMS_DIR, album_name)
