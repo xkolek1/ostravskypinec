@@ -1,21 +1,14 @@
 import json
 import os
 from datetime import datetime
-import subprocess
 
 # Cesty k souborům
 PROPOZICE_DIR = 'assets/propozice'
 ALBUMS_DIR = 'assets/images/albums'
 JSON_FILE = 'data.json'
 
-def get_added_files():
-    """Získá seznam přidaných souborů v posledním commitu."""
-    # Git příkaz pro získání seznamu změněných souborů
-    result = subprocess.run(['git', 'diff', '--name-only', 'HEAD~1', 'HEAD'], capture_output=True, text=True)
-    return result.stdout.strip().split('\n')
-
 def update_json_data():
-    # Načtení stávajících dat z JSON souboru
+    # Krok 1: Načtení stávajících dat z JSON souboru
     try:
         with open(JSON_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -23,43 +16,50 @@ def update_json_data():
         # Pokud soubor neexistuje nebo je prázdný, vytvoříme novou strukturu
         data = {'tournaments': [], 'photo_albums': []}
 
-    added_files = get_added_files()
+    # Krok 2: Vytvoření seznamů již existujících položek pro snadné porovnání
+    existing_tournaments = {t['fileName'] for t in data['tournaments']}
+    existing_albums = {a['albumName'] for a in data['photo_albums']}
+    
     today = datetime.now().strftime('%Y-%m-%d')
 
-    for file_path in added_files:
-        # Zpracování PDF propozic
-        if file_path.startswith(PROPOZICE_DIR) and file_path.endswith('.pdf'):
-            file_name = os.path.basename(file_path)
-            # Zkontrolujeme, zda již záznam neexistuje
-            if not any(t['fileName'] == file_name for t in data['tournaments']):
-                print(f"Nalezeny nové propozice: {file_name}")
-                data['tournaments'].append({
-                    'fileName': file_name,
-                    'pushDate': today
-                })
+    # Krok 3: Zpracování propozic turnajů
+    # Vytvoříme složku, pokud neexistuje, aby skript nespadl
+    os.makedirs(PROPOZICE_DIR, exist_ok=True) 
+    # Projdeme všechny soubory, které reálně existují ve složce
+    for file_name in os.listdir(PROPOZICE_DIR):
+        # Pokud soubor končí na .pdf a ještě není v našem JSONu, přidáme ho
+        if file_name.endswith('.pdf') and file_name not in existing_tournaments:
+            print(f"Nalezeny nové propozice: {file_name}")
+            data['tournaments'].append({
+                'fileName': file_name,
+                'pushDate': today
+            })
 
-        # Zpracování fotoalb
-        if file_path.startswith(ALBUMS_DIR):
-            # Získáme název alba (název složky)
-            album_name = file_path.split('/')[3]
-            if not any(a['albumName'] == album_name for a in data['photo_albums']):
+    # Krok 4: Zpracování fotoalb
+    os.makedirs(ALBUMS_DIR, exist_ok=True)
+    # Projdeme všechny podsložky (alba), které reálně existují
+    for album_name in os.listdir(ALBUMS_DIR):
+        album_path = os.path.join(ALBUMS_DIR, album_name)
+        # Pokud se jedná o složku a ještě není v našem JSONu, přidáme ji
+        if os.path.isdir(album_path) and album_name not in existing_albums:
+            try:
                 # Najdeme první obrázek v albu jako náhled
-                album_path = os.path.join(ALBUMS_DIR, album_name)
-                try:
-                    first_image = sorted([f for f in os.listdir(album_path) if f.lower().endswith(('.png', '.jpg', '.jpeg'))])[0]
-                    preview_image = os.path.join(album_path, first_image)
-                    
-                    print(f"Nalezeno nové fotoalbum: {album_name}")
-                    data['photo_albums'].append({
-                        'albumName': album_name,
-                        'pushDate': today,
-                        'previewImage': preview_image
-                    })
-                except IndexError:
-                    print(f"Varování: V albu '{album_name}' nebyly nalezeny žádné obrázky.")
+                images = sorted([f for f in os.listdir(album_path) if f.lower().endswith(('.png', '.jpg', '.jpeg'))])
+                if not images:
+                    raise IndexError # Přeskočíme na 'except', pokud je složka prázdná
+                
+                preview_image_path = os.path.join(album_path, images[0])
+                
+                print(f"Nalezeno nové fotoalbum: {album_name}")
+                data['photo_albums'].append({
+                    'albumName': album_name,
+                    'pushDate': today,
+                    'previewImage': preview_image_path
+                })
+            except IndexError:
+                print(f"Varování: Ve složce alba '{album_name}' nebyly nalezeny žádné obrázky.")
 
-
-    # Uložení aktualizovaných dat zpět do JSON souboru
+    # Krok 5: Uložení aktualizovaných dat zpět do JSON souboru
     with open(JSON_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
