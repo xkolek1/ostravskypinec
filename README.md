@@ -36,7 +36,7 @@ The core of this project is an automated content pipeline using **GitHub Actions
 
 ---
 
-## <iframe> Third-Party Integrations
+## iframe Third-Party Integrations
 
 The website uses iframes for two sections in the sidebar:
 -   **"Nejbližší akce" (Upcoming Events):** An embedded Google Calendar. Events need to be added there.

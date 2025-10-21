@@ -9,11 +9,12 @@ import locale # Pro správné řazení českých datumů
 try:
     locale.setlocale(locale.LC_TIME, 'cs_CZ.UTF-8')
 except locale.Error:
-    print("České locale 'cs_CZ.UTF-8' není dostupné. Řazení nemusí být správné.")
+    print("České locale 'cs_CZ.UTF-8' není dostupné. Řazení pravěpodobně nebude správné!")
 
 
-# Cesty ke složkám a souborům
+# Cesty k souborům
 PROPOZICE_DIR = 'assets/propozice'
+VYSLEDKY_DIR = 'assets/vysledky'
 ALBUMS_DIR = 'assets/images/albums'
 JSON_FILE = 'data.json'
 
@@ -25,11 +26,13 @@ def extract_dates_from_pdf(pdf_path):
     dates = []
     
     month_map = {
-        'ledna': '01', 'unora': '02', 'brezna': '03', 'dubna': '04',
-        'kvetna': '05', 'cervna': '06', 'cervence': '07', 'srpna': '08',
-        'zari': '09', 'rijna': '10', 'listopadu': '11', 'prosince': '12',
-        # Přidány varianty s diakritikou pro robustnost
-        'února': '02', 'března': '03', 'září': '09', 'října': '10'
+        'ledna': '01', 'února': '02', 'března': '03', 'dubna': '04',
+        'května': '05', 'června': '06', 'července': '07', 'srpna': '08',
+        'záři': '09', 'října': '10', 'listopadu': '11', 'prosince': '12',
+
+        'leden': '01', 'únor': '02', 'březen': '03', 'duben': '04',
+        'květen': '05', 'červen': '06', 'červenec': '07', 'srpen': '08',
+        'září': '09', 'říjen': '10', 'listopad': '11', 'prosinec': '12'
     }
 
     try:
@@ -42,7 +45,6 @@ def extract_dates_from_pdf(pdf_path):
         filtered_lines = [line for line in lines if not line.strip().lower().startswith("v ostravě dne")]
         filtered_text = "\n".join(filtered_lines)
 
-        # Regulární výraz, který tečku za měsícem bere jako nepovinnou (díky `\.?`)
         month_pattern_keys = '|'.join(month_map.keys())
         date_pattern = re.compile(
             r'\b(\d{1,2})\.\s*(\d{1,2}|' + month_pattern_keys + r')\.?\s*(\d{4})\b',
@@ -56,9 +58,7 @@ def extract_dates_from_pdf(pdf_path):
             
             month_str = str(month).lower()
             if not month_str.isdigit():
-                # Normalizace - odstranění diakritiky pro klíč ve slovníku
-                normalized_month = month_str.replace('ú', 'u').replace('ů', 'u').replace('ř', 'r').replace('í', 'i')
-                month_num = month_map.get(normalized_month) or month_map.get(month_str)
+                month_num = month_map.get(month_str)
             else:
                 month_num = month_str
             
@@ -70,7 +70,6 @@ def extract_dates_from_pdf(pdf_path):
     except Exception as e:
         print(f"Chyba při zpracování PDF souboru {pdf_path}: {e}")
     
-    # Seřadíme data chronologicky
     dates.sort(key=lambda date: datetime.strptime(date, "%d. %m. %Y"))
     return dates
 
@@ -80,16 +79,20 @@ def update_json_data():
         with open(JSON_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        data = {'tournaments': [], 'photo_albums': []}
+        data = {'tournaments': [], 'results':[], 'photo_albums': []}
 
     existing_tournaments = {t['fileName'] for t in data['tournaments']}
+    existing_results = {r['fileName'] for r in data['results']}
     existing_albums = {a['albumName'] for a in data['photo_albums']}
     
     today = datetime.now().strftime('%Y-%m-%d')
 
     os.makedirs(PROPOZICE_DIR, exist_ok=True)
     for file_name in os.listdir(PROPOZICE_DIR):
-        if file_name.endswith('.pdf') and file_name not in existing_tournaments:
+        # název souboru bez přípony
+        base_name, extension = os.path.splitext(file_name)
+        
+        if extension == '.pdf' and base_name not in existing_tournaments:
             print(f"Nalezeny nové propozice: {file_name}")
             pdf_path = os.path.join(PROPOZICE_DIR, file_name)
             
@@ -97,9 +100,23 @@ def update_json_data():
             print(f"Nalezená a zpracovaná data v souboru: {tournament_dates}")
 
             data['tournaments'].append({
-                'fileName': file_name,
+                'fileName': base_name,
                 'pushDate': today,
-                'tournamentDates': tournament_dates
+                'tournamentDates': tournament_dates,
+                'originalFile': file_name
+            })
+
+    os.makedirs(VYSLEDKY_DIR, exist_ok=True)
+    for file_name in os.listdir(VYSLEDKY_DIR):
+        base_name, extension = os.path.splitext(file_name)
+        if extension == '.pdf' and base_name not in existing_results:
+            print(f"Nalezeny nové výsledky: {file_name}")
+            pdf_path = os.path.join(VYSLEDKY_DIR, file_name)
+
+            data['results'].append({
+                'fileName': base_name,
+                'pushDate': today,
+                'originalFile': file_name
             })
 
     os.makedirs(ALBUMS_DIR, exist_ok=True)
@@ -111,6 +128,7 @@ def update_json_data():
                 if not images:
                     raise IndexError
                 preview_image_path = os.path.join(album_path, images[0])
+                preview_image_path = preview_image_path.replace('\\', '/')
                 print(f"Nalezeno nové fotoalbum: {album_name}")
                 data['photo_albums'].append({
                     'albumName': album_name,
