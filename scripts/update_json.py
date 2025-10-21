@@ -16,6 +16,9 @@ except locale.Error:
 PROPOZICE_DIR = 'assets/propozice'
 VYSLEDKY_DIR = 'assets/vysledky'
 ALBUMS_DIR = 'assets/images/albums'
+ZPRAVODAJE_DIR = 'assets/zpravodaje'
+ZEBRICKY_D_DIR = 'assets/zebricky/dospeli'
+ZEBRICKY_M_DIR = 'assets/zebricky/mladez'
 JSON_FILE = 'data.json'
 
 def extract_dates_from_pdf(pdf_path):
@@ -79,41 +82,94 @@ def update_json_data():
         with open(JSON_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        data = {'tournaments': [], 'results':[], 'photo_albums': []}
+        data = {'tournaments': [], 'results':[], 'photo_albums': [], 'zpravodaje': [], 'zebricky_dospeli': [], 'zebricky_mladez': []}
 
     existing_tournaments = {t['fileName'] for t in data['tournaments']}
     existing_results = {r['fileName'] for r in data['results']}
     existing_albums = {a['albumName'] for a in data['photo_albums']}
+    existing_zpravodaje = {z['fileName'] for z in data.get('zpravodaje', [])}
+    existing_zebricky_dospeli = {z['fileName'] for z in data.get('zebricky_dospeli', [])}
+    existing_zebricky_mladez = {z['fileName'] for z in data.get('zebricky_mladez', [])}
     
     today = datetime.now().strftime('%Y-%m-%d')
 
     os.makedirs(PROPOZICE_DIR, exist_ok=True)
-    for file_name in os.listdir(PROPOZICE_DIR):
-        # název souboru bez přípony
-        base_name, extension = os.path.splitext(file_name)
-        
-        if extension == '.pdf' and base_name not in existing_tournaments:
-            print(f"Nalezeny nové propozice: {file_name}")
-            pdf_path = os.path.join(PROPOZICE_DIR, file_name)
-            
-            tournament_dates = extract_dates_from_pdf(pdf_path)
-            print(f"Nalezená a zpracovaná data v souboru: {tournament_dates}")
+    for season_folder in os.listdir(PROPOZICE_DIR):
+        season_path = os.path.join(PROPOZICE_DIR, season_folder)
+        if os.path.isdir(season_path):
+            for file_name in os.listdir(season_path):
+                base_name, extension = os.path.splitext(file_name)
+                
+                if extension == '.pdf' and base_name not in existing_tournaments:
+                    print(f"Nalezeny nové propozice: {file_name} ve složce {season_folder}")
+                    pdf_path = os.path.join(season_path, file_name)
+                    
+                    tournament_dates = extract_dates_from_pdf(pdf_path)
+                    print(f"Nalezená a zpracovaná data v souboru: {tournament_dates}")
 
-            data['tournaments'].append({
+                    data['tournaments'].append({
+                        'fileName': base_name,
+                        'pushDate': today,
+                        'tournamentDates': tournament_dates,
+                        'originalFile': file_name,
+                        'season': season_folder
+                    })
+
+    os.makedirs(VYSLEDKY_DIR, exist_ok=True)
+    for season_folder in os.listdir(VYSLEDKY_DIR):
+        season_path = os.path.join(VYSLEDKY_DIR, season_folder)
+        if os.path.isdir(season_path):
+            for file_name in os.listdir(season_path):
+                base_name, extension = os.path.splitext(file_name)
+
+                if extension == '.pdf' and base_name not in existing_results:
+                    print(f"Nalezeny nové výsledky: {file_name} ve složce {season_folder}")
+                    pdf_path = os.path.join(season_path, file_name)
+
+                    data['results'].append({
+                        'fileName': base_name,
+                        'pushDate': today,
+                        'originalFile': file_name,
+                        'season': season_folder
+                    })
+
+    os.makedirs(ZPRAVODAJE_DIR, exist_ok=True)
+    for season_folder in os.listdir(ZPRAVODAJE_DIR):
+        season_path = os.path.join(ZPRAVODAJE_DIR, season_folder)
+        if os.path.isdir(season_path):
+            for file_name in os.listdir(season_path):
+                base_name, extension = os.path.splitext(file_name)
+
+                if extension == '.pdf' and base_name not in existing_zpravodaje:
+                    print(f"Nalezeny nové výsledky: {file_name} ve složce {season_folder}")
+                    pdf_path = os.path.join(season_path, file_name)
+
+                    data['zpravodaje'].append({
+                        'fileName': base_name,
+                        'pushDate': today,
+                        'originalFile': file_name,
+                        'season': season_folder
+                    })
+    
+    os.makedirs(ZEBRICKY_D_DIR, exist_ok=True)
+    for file_name in os.listdir(ZEBRICKY_D_DIR):
+        base_name, extension = os.path.splitext(file_name)
+
+        if extension == '.pdf' and base_name not in existing_zebricky_dospeli:
+            print(f"Nalezen žebříček dospělých: {file_name}")
+            data['zebricky_dospeli'].append({
                 'fileName': base_name,
                 'pushDate': today,
-                'tournamentDates': tournament_dates,
                 'originalFile': file_name
             })
 
-    os.makedirs(VYSLEDKY_DIR, exist_ok=True)
-    for file_name in os.listdir(VYSLEDKY_DIR):
+    os.makedirs(ZEBRICKY_M_DIR, exist_ok=True)
+    for file_name in os.listdir(ZEBRICKY_M_DIR):
         base_name, extension = os.path.splitext(file_name)
-        if extension == '.pdf' and base_name not in existing_results:
-            print(f"Nalezeny nové výsledky: {file_name}")
-            pdf_path = os.path.join(VYSLEDKY_DIR, file_name)
 
-            data['results'].append({
+        if extension == '.pdf' and base_name not in existing_zebricky_mladez:
+            print(f"Nalezen žebříček mládeže: {file_name}")
+            data['zebricky_mladez'].append({
                 'fileName': base_name,
                 'pushDate': today,
                 'originalFile': file_name

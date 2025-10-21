@@ -1,29 +1,38 @@
 {
     "tournaments": [
         {
-            "fileName": "priloha0",
+            "fileName": "PMO U15 a U19",
             "pushDate": "2025-10-21",
             "tournamentDates": [
                 "16. 03. 2025"
             ],
-            "originalFile": "priloha0.pdf"
+            "originalFile": "PMO U15 a U19.pdf",
+            "season": "2024"
         },
         {
-            "fileName": "BTM-mini",
+            "fileName": "BTM mini - podzim",
             "pushDate": "2025-10-21",
             "tournamentDates": [
                 "19. 10. 2025",
                 "09. 11. 2025",
                 "06. 12. 2025"
             ],
-            "originalFile": "BTM-mini.pdf"
+            "originalFile": "BTM mini - podzim.pdf",
+            "season": "2025"
         }
     ],
     "results": [
         {
-            "fileName": "priloha0",
+            "fileName": "BTM 4",
             "pushDate": "2025-10-21",
-            "originalFile": "priloha0.pdf"
+            "originalFile": "BTM 4.pdf",
+            "season": "2024"
+        },
+        {
+            "fileName": "BTM 1",
+            "pushDate": "2025-10-21",
+            "originalFile": "BTM 1.pdf",
+            "season": "2025"
         }
     ],
     "photo_albums": [
@@ -31,6 +40,34 @@
             "albumName": "test",
             "pushDate": "2025-10-21",
             "previewImage": "assets/images/albums/test/0.jpg"
+        }
+    ],
+    "zpravodaje": [
+        {
+            "fileName": "zpravodaj2025-6-3-23-12-34",
+            "pushDate": "2025-10-21",
+            "originalFile": "zpravodaj2025-6-3-23-12-34.pdf",
+            "season": "2024"
+        },
+        {
+            "fileName": "zpravodaj2025-8-7-13-23-33",
+            "pushDate": "2025-10-21",
+            "originalFile": "zpravodaj2025-8-7-13-23-33.pdf",
+            "season": "2025"
+        }
+    ],
+    "zebricky_dospeli": [
+        {
+            "fileName": "messt-dospeli2025-8-19-9-7-20",
+            "pushDate": "2025-10-21",
+            "originalFile": "messt-dospeli2025-8-19-9-7-20.pdf"
+        }
+    ],
+    "zebricky_mladez": [
+        {
+            "fileName": "messt-mladez2025-1-29-10-23-54",
+            "pushDate": "2025-10-21",
+            "originalFile": "messt-mladez2025-1-29-10-23-54.pdf"
         }
     ]
 }
