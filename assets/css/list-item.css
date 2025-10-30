@@ -1,0 +1,46 @@
+/* Styly pro sdílenou položku seznamu (turnaj, zpravodaj) */
+/* Použito na index.html, turnaje.html, zpravodaje.html */
+
+.tournament-header {
+    padding: 15px 20px;
+    background: var(--light-gray);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+    position: relative;
+    text-decoration: none;
+}
+
+a.tournament-header {
+    color: var(--dark-blue);
+}
+a.tournament-header:visited {
+    color: var(--primary-blue);
+}
+
+.tournament-header:hover {
+    background: #e9ecef;
+}
+
+.tournament-header.active {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.tournament-header.active .tournament-date {
+    color: white;
+}
+
+.tournament-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.tournament-date {
+    color: var(--dark-blue);    
+    font-size: 0.9rem;
+    margin-left: auto;
+    margin-right: 25px;
+}

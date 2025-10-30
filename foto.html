@@ -4,52 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fotogalerie - MěSST Ostrava</title>
+    <title>Foto - MěSST Ostrava</title>
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/sidebar.css">
-    <link rel="stylesheet" href="assets/css/else.css">
+    <link rel="stylesheet" href="assets/css/pagination.css">
+    <link rel="stylesheet" href="assets/css/foto.css">
     <script src="assets/js/include.js"></script>
-    <style>
-        /* Styly specifické pro fotogalerii */
-        .album-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .album-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .album-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-        }
-
-        .album-thumbnail {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            background-color: #f0f0f0;
-        }
-
-        .album-title {
-            padding: 15px;
-            font-weight: 600;
-            color: var(--dark-blue);
-            text-align: center;
-        }
-    </style>
 </head>
 
-<body>
+<body id="page-foto">
     <header>
         <div id="header-placeholder"></div>
     </header>
@@ -64,6 +28,8 @@
                         <p>Načítám fotoalba...</p>
                     </div>
 
+                    <div id="pagination-container" class="pagination"></div>
+
                 </section>
                 <div id="sponsors-placeholder"></div>
             </div>
@@ -73,44 +39,6 @@
     </div>
 
     <div id="footer-placeholder"></div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('album-grid-container');
-
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                // Zkontrolujeme, zda existují nějaká alba
-                if (!data.photo_albums || data.photo_albums.length === 0) {
-                    container.innerHTML = '<p>Momentálně zde nejsou žádná fotoalba.</p>';
-                    return;
-                }
-
-                // Vyčistíme kontejner
-                container.innerHTML = '';
-
-                // Seřadíme alba sestupně podle data nahrání
-                const sortedAlbums = data.photo_albums.sort((a, b) => new Date(b.pushDate) - new Date(a.pushDate));
-
-                sortedAlbums.forEach(album => {
-                    // Vytvoříme HTML pro každou kartu alba
-                    // Prozatím odkaz nikam nevede, ale je připraven pro budoucí rozšíření
-                    const albumCardHtml = `
-                        <a href="#" class="album-card">
-                            <div class="album-thumbnail" style="background-image: url('${album.previewImage}')"></div>
-                            <div class="album-title">${album.albumName.replace(/_/g, ' ')}</div>
-                        </a>
-                    `;
-                    container.innerHTML += albumCardHtml;
-                });
-            })
-            .catch(error => {
-                console.error('Chyba při načítání fotoalb:', error);
-                container.innerHTML = '<p>Nepodařilo se načíst fotoalba.</p>';
-            });
-    });
-    </script>
+    <script src="assets/js/pagination.js"></script>
 </body>
-
 </html>

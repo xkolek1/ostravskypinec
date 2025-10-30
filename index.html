@@ -8,48 +8,42 @@
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/sidebar.css">
-    <link rel="stylesheet" href="assets/css/else.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/list-item.css">
+    
     <script src="assets/js/index-turnaje.js"></script>
     <script src="assets/js/include.js"></script>
 </head>
 
 <body>
-    <!-- Header s menu -->
     <header>
         <div id="header-placeholder"></div>
-
-        <!-- Fotky -->
-        <div class="player-photos">
-            <div class="photo-slide"
-                style="background-image: url('assets/images/cpo.jpg');">
-                <div class="photo-info">Czech Para Open 2025, Várenská</div>
-            </div>
-            <div class="photo-slide"
-                style="background-image: url('assets/images/pmo.jpg');">
-                <div class="photo-info">Přebory Města Ostravy U11 2025, Várenská</div>
-            </div>
-            <div class="photo-slide"
-                style="background-image: url('assets/images/mej1.jpg');">
-                <div class="photo-info">Mistrovství Evropy Juniorů 2025, RT Torax Arena</div>
-            </div>            
-        </div>
     </header>
 
-    <!-- Hlavní obsah -->
+    <div class="player-photos">
+        <div class="photo-slide" style="background-image: url('assets/images/1.jpg');">
+            <div class="photo-info">Czech Para Open 2025, Várenská</div>
+        </div>
+        <div class="photo-slide" style="background-image: url('assets/images/2.jpg');">
+            <div class="photo-info">Přebory Města Ostravy U11 2025, Várenská</div>
+        </div>
+        <div class="photo-slide" style="background-image: url('assets/images/3.jpg');">
+            <div class="photo-info">Mistrovství Evropy Juniorů 2025, RT Torax Arena</div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="main-content">
             <div class="content-primary">
                 <div id="commits-container"></div>
                 <section id="turnaje">
                     <h2 class="section-title">Turnaje</h2>
-                    <p><strong>Informace o turnajích na půdě MěSST Ostrava</strong> 
+                    <p><strong>Informace o turnajích na půdě MěSST Ostrava</strong>
                     <p><a href="turnaje.html" class="basic-link">Kompletní výpis turnajů</a></p>
                     <br>
-                    <!-- Sekce Mládež -->
                     <div class="tournament-category">
                         <h3>Mládež</h3>
                         <div class="tournament-list">
-                            <!-- PMO jednotlivců -->
                             <div class="tournament-item">
                                 <div class="tournament-header" onclick="toggleTournament(this)">
                                     <div class="tournament-name">PMO jednotlivců (U11, U13, U15, U17, U19)</div>
@@ -61,11 +55,16 @@
                                         <div class="tournament-info">
                                             <div class="info-group">
                                                 <h4>Termíny turnajů:</h4>
-                                                <p><strong>U11:</strong> zatím neurčeno <a href="#"></a></p>
-                                                <p><strong>U13:</strong> zatím neurčeno <a href="#"></a></p>
-                                                <p><strong>U15:</strong> zatím neurčeno <a href="#"></a></p>
-                                                <p><strong>U17:</strong> zatím neurčeno <a href="#"></a></p>
-                                                <p><strong>U19:</strong> zatím neurčeno <a href="#"></a></p>
+                                                <p><strong>U11:</strong> zatím neurčeno <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>U13:</strong> zatím neurčeno <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>U15:</strong> zatím neurčeno <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>U17:</strong> zatím neurčeno <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>U19:</strong> zatím neurčeno <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
                                             </div>
                                             <div class="info-group">
                                                 <h4>Místo a čas konání:</h4>
@@ -74,15 +73,11 @@
                                             </div>
                                         </div>
                                         <div class="tournament-actions">
-                                            <!-- <a href="#" class="btn btn-primary">Propozice U11</a> -->
-                                            <!-- <a href="#" class="btn btn-primary">Propozice U13 a U17</a> -->
-                                            <!-- <a href="#" class="btn btn-primary">Propozice U15 a U19</a> -->
-                                        </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- PMO družstev -->
                             <div class="tournament-item">
                                 <div class="tournament-header" onclick="toggleTournament(this)">
                                     <div class="tournament-name">PMO družstev (U15, U19)</div>
@@ -107,14 +102,11 @@
                                             </div>
                                         </div>
                                         <div class="tournament-actions">
-                                            <!-- <a href="#" class="btn btn-primary">Propozice</a> -->
-                                            <!-- <a href="#" class="btn btn-success">Celkové výsledky</a> -->
-                                        </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- BTM -->
                             <div class="tournament-item">
                                 <div class="tournament-header" onclick="toggleTournament(this)">
                                     <div class="tournament-name">BTM (U19 - divize A, B, C)</div>
@@ -126,12 +118,18 @@
                                         <div class="tournament-info">
                                             <div class="info-group">
                                                 <h4>Termíny:</h4>
-                                                <p><strong>1:</strong> 28. 09. 2025 <a href="#">výsledky</a></p>
-                                                <p><strong>2:</strong> 22. 11. 2025 <a href="#"></a></p>
-                                                <p><strong>3:</strong> 14. 12. 2025 <a href="#"></a></p>
-                                                <p><strong>4:</strong> xx. 01. 2026 <a href="#"></a></p>
-                                                <p><strong>5:</strong> xx. 02. 2026 <a href="#"></a></p>
-                                                <p><strong>6:</strong> xx. 03. 2026 <a href="#"></a></p>
+                                                <p><strong>1:</strong> 28. 09. 2025 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link">výsledky</a></p>
+                                                <p><strong>2:</strong> 22. 11. 2025 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>3:</strong> 14. 12. 2025 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>4:</strong> xx. 01. 2026 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>5:</strong> xx. 02. 2026 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>6:</strong> xx. 03. 2026 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
                                             </div>
                                             <div class="info-group">
                                                 <h4>Místo a čas konání:</h4>
@@ -142,17 +140,13 @@
                                             </div>
                                         </div>
                                         <div class="tournament-actions">
-                                            <!-- První propozice -->
-                                            <a href="#" class="btn btn-primary">Propozice 1-3</a>
-                                            <!-- <a href="#" class="btn btn-primary">Propozice 4-6</a> -->
-                                            <!-- Konečné výsledky -->
-                                            <!-- <a href="#" class="btn btn-success">Celkové výsledky</a> -->
-                                        </div>
+                                            <a href="#" target="_blank" rel="noopener" class="btn btn-primary">Propozice
+                                                1-3</a>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- BTM mini -->
                             <div class="tournament-item">
                                 <div class="tournament-header" onclick="toggleTournament(this)">
                                     <div class="tournament-name">BTM mini (U11)</div>
@@ -164,12 +158,18 @@
                                         <div class="tournament-info">
                                             <div class="info-group">
                                                 <h4>Termíny:</h4>
-                                                <p><strong>1:</strong> 19. 10. 2025 <a href="#"></a></p>
-                                                <p><strong>2:</strong> 09. 11. 2025 <a href="#"></a></p>
-                                                <p><strong>3:</strong> 06. 12. 2025 <a href="#"></a></p>
-                                                <p><strong>4:</strong> xx. 0x. 2026 <a href="#"></a></p>
-                                                <p><strong>5:</strong> xx. 0x. 2026 <a href="#"></a></p>
-                                                <p><strong>6:</strong> xx. 0x. 2026 <a href="#"></a></p>
+                                                <p><strong>1:</strong> 19. 10. 2025 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>2:</strong> 09. 11. 2025 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>3:</strong> 06. 12. 2025 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>4:</strong> xx. 0x. 2026 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>5:</strong> xx. 0x. 2026 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
+                                                <p><strong>6:</strong> xx. 0x. 2026 <a href="#" target="_blank"
+                                                        rel="noopener" class="basic-link"></a></p>
                                             </div>
                                             <div class="info-group">
                                                 <h4>Místo a čas konání:</h4>
@@ -180,21 +180,18 @@
                                             </div>
                                         </div>
                                         <div class="tournament-actions">
-                                            <a href="#" class="btn btn-primary">Propozice 1-3</a>
-                                            <!-- <a href="#" class="btn btn-primary">Propozice 4-6</a> -->
-                                            <!-- <a href="#" class="btn btn-success">Celkové výsledky</a> -->
-                                        </div>
+                                            <a href="#" target="_blank" rel="noopener" class="btn btn-primary">Propozice
+                                                1-3</a>
+                                            </div>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sekce Dospělí -->
                     <div class="tournament-category">
                         <h3>Dospělí</h3>
                         <div class="tournament-list">
-                            <!-- PMO dospělí -->
                             <div class="tournament-item">
                                 <div class="tournament-header" onclick="toggleTournament(this)">
                                     <div class="tournament-name">PMO jednotlivců</div>
@@ -207,8 +204,8 @@
                                             <div class="info-group">
                                                 <h4>Termín:</h4>
                                                 <p>xx. 06. 2026</p>
-                                            
-                                                
+
+
                                             </div>
                                             <div class="info-group">
                                                 <h4>Místo a čas konání:</h4>
@@ -217,16 +214,18 @@
                                             </div>
                                         </div>
                                         <div class="tournament-actions">
-                                            <a href="#" class="btn btn-primary">Propozice</a>
-                                            <a href="#" class="btn btn-secondary">Přihlášky online</a>
-                                            <a href="#" class="btn btn-success">Výsledky</a>
+                                            <a href="#" target="_blank" rel="noopener"
+                                                class="btn btn-primary">Propozice</a>
+                                            <a href="#" target="_blank" rel="noopener"
+                                                class="btn btn-secondary">Přihlášky online</a>
+                                            <a href="#" target="_blank" rel="noopener"
+                                                class="btn btn-success">Výsledky</a>
                                         </div>
-                                
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- TOP8 -->                           
                             <div class="tournament-item">
                                 <div class="tournament-header" onclick="toggleTournament(this)">
                                     <div class="tournament-name">TOP8</div>
@@ -237,7 +236,13 @@
                                     <div class="tournament-details">
                                         <div class="tournament-info">
                                             <div class="info-group">
-                                                <h4>Termíny (seznam hráčů: <a href="">1</a>, <a href="">2</a>, <a href="">3</a>, <a href="">4</a>, <a href="">5</a>):</h4>
+                                                <h4>Termíny (seznam hráčů: <a href="" target="_blank" rel="noopener"
+                                                        class="basic-link">1</a>, <a href="" target="_blank"
+                                                        rel="noopener" class="basic-link">2</a>, <a href=""
+                                                        target="_blank" rel="noopener" class="basic-link">3</a>, <a
+                                                        href="" target="_blank" rel="noopener" class="basic-link">4</a>,
+                                                    <a href="" target="_blank" rel="noopener" class="basic-link">5</a>):
+                                                </h4>
                                                 <p><strong>MěP 1. třídy:</strong> 22. 04. 2025, TJ Sokol Hrabůvka</p>
                                                 <p><strong>MěP 2. třídy:</strong> 14. 04. 2025, TJ Sokol Hrabůvka</p>
                                                 <p><strong>MěP 3. třídy:</strong> 24. 04. 2025, KST Zengrovka</p>
@@ -245,7 +250,13 @@
                                                 <p><strong>MěP 5. třídy:</strong> 15. 04. 2025, SK Vřesina LT</p>
                                             </div>
                                             <div class="info-group">
-                                                <h4>Vítězové (kompletní výsledky: <a href="">1</a>, <a href="">2</a>, <a href="">3</a>, <a href="">4</a>, <a href="">5</a>):</h4>
+                                                <h4>Vítězové (kompletní výsledky: <a href="" target="_blank"
+                                                        rel="noopener" class="basic-link">1</a>, <a href=""
+                                                        target="_blank" rel="noopener" class="basic-link">2</a>, <a
+                                                        href="" target="_blank" rel="noopener" class="basic-link">3</a>,
+                                                    <a href="" target="_blank" rel="noopener" class="basic-link">4</a>,
+                                                    <a href="" target="_blank" rel="noopener" class="basic-link">5</a>):
+                                                </h4>
                                                 <p><strong>Roman Vicher</strong> - TJ Sokol Radvanice-Bartovice</p>
                                                 <p><strong>David Osvald</strong> - TJ Sokol Hrabůvka</p>
                                                 <p><strong>František Chmura</strong> - SK Svinov</p>
@@ -254,10 +265,12 @@
                                             </div>
                                         </div>
                                         <div class="tournament-actions">
-                                            <a href="#" class="btn btn-primary">Propozice</a>
-                                            <a href="#" class="btn btn-secondary">Přihlášky online</a>
+                                            <a href="#" target="_blank" rel="noopener"
+                                                class="btn btn-primary">Propozice</a>
+                                            <a href="#" target="_blank" rel="noopener"
+                                                class="btn btn-secondary">Přihlášky online</a>
                                         </div>
-                                
+
                                     </div>
                                 </div>
                             </div>
@@ -265,23 +278,13 @@
                     </div>
                 </section>
 
-                
-
-                <!-- Sponzoři -->
                 <div id="sponsors-placeholder"></div>
             </div>
 
-            <!-- Sekundární obsah - Sidebar -->
             <div id="sidebar-placeholder"></div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div id="footer-placeholder"></div>
-    </footer>
-
-    
+    <div id="footer-placeholder"></div>
 </body>
-
 </html>

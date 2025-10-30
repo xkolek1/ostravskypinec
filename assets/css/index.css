@@ -1,0 +1,138 @@
+/* Styly pro index - úvodní fotky a turnaje*/
+.player-photos {
+    height: 300px;
+    display: flex;
+    position: relative;
+    z-index: 1;
+}
+.photo-slide {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+.photo-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.photo-slide:hover {
+    flex: 1.5;
+}
+.photo-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    opacity: 0;
+    color: #fff;
+    text-align: center;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.photo-slide:hover .photo-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tournament-category {
+    margin-bottom: 30px;
+}
+.tournament-category h3 {
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+    padding-left: 15px;
+    border-left: 4px solid var(--yellow);
+}
+.tournament-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+.tournament-item {
+    border-bottom: 1px solid #eee;
+}
+.tournament-item:last-child {
+    border-bottom: none;
+}
+.tournament-toggle {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+.tournament-header.active .tournament-toggle {
+    transform: rotate(180deg);
+}
+.tournament-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: white;
+}
+.tournament-content.active {
+    max-height: 500px;
+}
+.tournament-details {
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+.tournament-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.tournament-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary {
+    background: var(--primary-blue);
+    color: white;
+}
+.btn-primary:hover {
+    background: var(--dark-blue);
+}
+.btn-secondary {
+    background: var(--light-gray);
+    color: var(--dark-gray);
+}
+.btn-secondary:hover {
+    background: #dee2e6;
+}
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+.btn-success:hover {
+    background: #218838;
+}
+
+.info-group h4 {
+    color: var(--dark-blue);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+.info-group p {
+    margin-bottom: 5px;
+}

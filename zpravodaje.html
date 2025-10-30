@@ -4,17 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MěSST Ostrava</title>
+    <title>Zpravodaje - MěSST Ostrava</title>
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/sidebar.css">
-    <link rel="stylesheet" href="assets/css/else.css">
+    <link rel="stylesheet" href="assets/css/list-item.css">
     <link rel="stylesheet" href="assets/css/pagination.css">
-    <script src="assets/js/pagination.js"></script>
     <script src="assets/js/include.js"></script>
 </head>
 
-<body>
+<body id="page-zpravodaje">
     <header>
         <div id="header-placeholder"></div>
     </header>
@@ -22,21 +21,17 @@
     <div class="container">
         <div class="main-content">
             <div class="content-primary">
-                <section id="turnaje">
+                <section id="zpravodaje">
                     <h2 class="section-title">Zpravodaje</h2>
                     
-                    <div class="page active" id="page-1"></div>
-                    <div class="page" id="page-2"></div>
-                    <div class="page" id="page-3">
-                        <a href="https://www.ostravskypinec.cz/souteze/archiv-vysledku-a-propozic" target="_blank" rel="noopener" class="tournament-header">
-                            <div class="tournament-name">Archiv všech zpravodajů</div>
-                        </a>
+                    <div id="content-container">
+                        <p>Načítám data sezón...</p>
                     </div>
 
                     <div class="pagination">
-                        <button id="prev-page" disabled>Další</button>
-                        <span class="pagination-info" id="page-info">Sezona 2025/2026</span>
-                        <button id="next-page">Předchozí</button>
+                        <button id="prev-page" class="pagination-prev" title="Předchozí">&laquo;</button>
+                        <span class="pagination-info" id="page-info">Načítám...</span>
+                        <button id="next-page" class="pagination-next" title="Další">&raquo;</button>
                     </div>
                 </section>
                 <div id="sponsors-placeholder"></div>
@@ -46,57 +41,6 @@
     </div>
 
     <div id="footer-placeholder"></div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const seasonToPageId = {
-            '2025': 'page-1',
-            '2024': 'page-2',
-            '2023': 'page-3',
-            '2022': 'page-4',
-            '2021': 'page-5',
-            '2020': 'page-6',
-            '2019': 'page-7',
-            '2018': 'page-8',   
-            '2017': 'page-9',
-            '2016': 'page-10',
-            '2015': 'page-11',
-            '2014': 'page-12',
-        };
-
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-
-                const allItems = [
-                    ...data.zpravodaje.map(item => ({ ...item, type: 'zpravodaje' })),
-                ];
-
-                // Seřadíme všechny položky podle data nahrání (sestupně)
-                allItems.sort((a, b) => new Date(b.pushDate) - new Date(a.pushDate));
-
-                allItems.forEach(item => {
-                    const pageId = seasonToPageId[item.season];
-                    if (pageId) {
-                        const container = document.getElementById(pageId);
-                        let itemHtml = '';
-
-                        if (item.type === 'zpravodaje') {
-                            itemHtml = `
-                            <a class="tournament-header" href="assets/propozice/${item.season}/${item.originalFile}" target="_blank" rel="noopener">
-                                <div class="tournament-name">${item.fileName}</div>
-                                <div class="tournament-date">${item.pushDate}</div>
-                            </a>`;
-                        }
-                        
-                        if(container) {
-                            container.innerHTML += itemHtml;
-                        }
-                    }
-                });
-            })
-            .catch(error => console.error('Chyba při načítání dat:', error));
-    });
-    </script>
+    <script src="assets/js/pagination.js"></script>
 </body>
 </html>

@@ -15,11 +15,14 @@ except locale.Error:
 # Cesty k souborům
 PROPOZICE_DIR = 'assets/propozice'
 VYSLEDKY_DIR = 'assets/vysledky'
-ALBUMS_DIR = 'assets/images/albums'
+ALBUMS_DIR = 'assets/images/albums' 
 ZPRAVODAJE_DIR = 'assets/zpravodaje'
 ZEBRICKY_D_DIR = 'assets/zebricky/dospeli'
 ZEBRICKY_M_DIR = 'assets/zebricky/mladez'
 JSON_FILE = 'data.json'
+
+# Seznam souborů, které chceme ignorovat
+IGNORE_FILES = {'.DS_Store', 'desktop.ini', 'Thumbs.db'}
 
 def extract_dates_from_pdf(pdf_path):
     """
@@ -93,6 +96,7 @@ def update_json_data():
     
     today = datetime.now().strftime('%Y-%m-%d')
 
+    # --- ZPRACOVÁNÍ PROPOZIC ---
     os.makedirs(PROPOZICE_DIR, exist_ok=True)
     for season_folder in os.listdir(PROPOZICE_DIR):
         season_path = os.path.join(PROPOZICE_DIR, season_folder)
@@ -115,6 +119,7 @@ def update_json_data():
                         'season': season_folder
                     })
 
+    # --- ZPRACOVÁNÍ VÝSLEDKŮ ---
     os.makedirs(VYSLEDKY_DIR, exist_ok=True)
     for season_folder in os.listdir(VYSLEDKY_DIR):
         season_path = os.path.join(VYSLEDKY_DIR, season_folder)
@@ -133,6 +138,7 @@ def update_json_data():
                         'season': season_folder
                     })
 
+    # --- ZPRACOVÁNÍ ZPRAVODAJŮ ---
     os.makedirs(ZPRAVODAJE_DIR, exist_ok=True)
     for season_folder in os.listdir(ZPRAVODAJE_DIR):
         season_path = os.path.join(ZPRAVODAJE_DIR, season_folder)
@@ -151,6 +157,7 @@ def update_json_data():
                         'season': season_folder
                     })
     
+    # --- ZPRACOVÁNÍ ŽEBŘÍČKŮ DOSPĚLÝCH ---
     os.makedirs(ZEBRICKY_D_DIR, exist_ok=True)
     for file_name in os.listdir(ZEBRICKY_D_DIR):
         base_name, extension = os.path.splitext(file_name)
@@ -163,6 +170,7 @@ def update_json_data():
                 'originalFile': file_name
             })
 
+    # --- ZPRACOVÁNÍ ŽEBŘÍČKŮ MLÁDEŽE ---
     os.makedirs(ZEBRICKY_M_DIR, exist_ok=True)
     for file_name in os.listdir(ZEBRICKY_M_DIR):
         base_name, extension = os.path.splitext(file_name)
@@ -175,27 +183,53 @@ def update_json_data():
                 'originalFile': file_name
             })
 
+    # --- ZPRACOVÁNÍ NOVÝCH FOTOALB ---
     os.makedirs(ALBUMS_DIR, exist_ok=True)
+
+    def strip_album_prefix(name):
+        # odstraní prefix ve tvaru "123_"
+        return re.sub(r'^\d{3}_', '', name)
+
     for album_name in os.listdir(ALBUMS_DIR):
         album_path = os.path.join(ALBUMS_DIR, album_name)
+        
+        # Zpracuje pouze pokud je to složka A ZÁROVEŇ ještě není v JSONu
         if os.path.isdir(album_path) and album_name not in existing_albums:
-            try:
-                images = sorted([f for f in os.listdir(album_path) if f.lower().endswith(('.png', '.jpg', '.jpeg'))])
-                if not images:
-                    raise IndexError
-                preview_image_path = os.path.join(album_path, images[0])
-                preview_image_path = preview_image_path.replace('\\', '/')
-                print(f"Nalezeno nové fotoalbum: {album_name}")
-                data['photo_albums'].append({
-                    'albumName': album_name,
-                    'pushDate': today,
-                    'previewImage': preview_image_path
-                })
-            except IndexError:
-                print(f"Varování: Ve složce alba '{album_name}' nebyly nalezeny žádné obrázky.")
+            
+            # Najde všechny soubory, odfiltruje systémové a seřadí je
+            images = sorted([
+                f for f in os.listdir(album_path) 
+                if f not in IGNORE_FILES and \
+                   os.path.isfile(os.path.join(album_path, f))
+            ])
+            
+            if not images:
+                print(f"Varování: Ve složce alba '{album_name}' nebyly nalezeny žádné obrázky. Přeskakuji.")
+                continue
 
+            # Použije první obrázek jako náhled
+            preview_image_filename = images[0]
+            
+            # preview_image_path = f"https://pub-32012a38b98242498823abfd03e3d82b.r2.dev/foto/{album_name}/{preview_image_filename}"
+            preview_image_path = f"assets/images/albums/{album_name}/{preview_image_filename}"
+
+            display_name = strip_album_prefix(album_name)
+
+            print(f"Nalezeno nové fotoalbum: {album_name} (obsahuje {len(images)} fotek)")
+            
+            data['photo_albums'].append({
+                'displayName': display_name,
+                'albumName': album_name,
+                'pushDate': today,
+                'previewImage': preview_image_path,
+                'photos': images
+            })
+
+    # --- ULOŽENÍ ZPĚT DO JSON ---
     with open(JSON_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
+        
+    print(f"\nSoubor '{JSON_FILE}' byl úspěšně aktualizován.")
 
 if __name__ == '__main__':
     update_json_data()
